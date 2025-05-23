@@ -1,0 +1,14 @@
+
+img{
+    height: 140px;
+    will-change: contents;
+
+}
+h1{
+    color: brown;
+    text-align: center;
+    font-size: 260%;
+    word-spacing: 10px;
+    margin-top: 1%0px;
+
+}
