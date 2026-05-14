@@ -3,83 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Groupe d'Études Expert</title>
+    <title>Plateforme Étudiante - Groupe d'Études Expert</title>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-    <header>
-        <div class="container">
-            <h1>Groupe d'Études Expert</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#recherche">Recherche</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+<body class="platform-body">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>Expert Study</h2>
         </div>
-    </header>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" class="nav-link active" data-target="dashboard">Tableau de Bord</a></li>
+                <li><a href="#" class="nav-link" data-target="ai-assistant">Assistant IA</a></li>
+                <li><a href="#" class="nav-link" data-target="resources">Ressources</a></li>
+                <li><a href="#" class="nav-link" data-target="planner">Planning</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <p><ins>Rehema Kasongo</ins></p>
+        </div>
+    </aside>
 
-    <main>
-        <section id="hero">
-            <div class="container">
-                <img src="image/fruit.jpg" alt="photo rehema" class="hero-image">
-                <p class="slogan">Tout est possible si vous nous soutenez</p>
-                <a href="https://www.unioncompanysarl.com" class="btn">Voir plus</a>
+    <main class="content-area">
+        <header class="top-bar">
+            <h1>Bienvenue sur votre Espace d'Études</h1>
+        </header>
+
+        <section id="dashboard" class="content-section active">
+            <div class="welcome-card">
+                <h2>Bonjour, Étudiant !</h2>
+                <p>Prêt à exceller aujourd'hui ? Voici un aperçu de votre progression.</p>
             </div>
-        </section>
-
-        <section id="services">
-            <div class="container">
-                <h2>Nos Services</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <h3>Soutien Scolaire</h3>
-                        <p>Accompagnement personnalisé pour tous les niveaux.</p>
-                    </div>
-                    <div class="service-card">
-                        <h3>Préparation Examens</h3>
-                        <p>Réussissez vos examens avec nos experts.</p>
-                    </div>
-                    <div class="service-card">
-                        <h3>Orientation</h3>
-                        <p>Conseils pour votre avenir académique.</p>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Cours suivis</h3>
+                    <p class="stat-number">12</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Heures d'études</h3>
+                    <p class="stat-number">45h</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Objectifs atteints</h3>
+                    <p class="stat-number">85%</p>
                 </div>
             </div>
         </section>
 
-        <section id="recherche">
-            <div class="container">
-                <h2>Recherche</h2>
-                <form action="https://www.google.com/search" method="GET" class="search-form">
-                    <label for="recherche-input">Tapez ici votre recherche :</label>
-                    <input type="search" name="q" id="recherche-input" placeholder="Ex: Mathématiques">
-                    <button type="submit">Rechercher</button>
+        <section id="ai-assistant" class="content-section">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h2>Assistant IA Expert</h2>
+                    <p>Posez vos questions académiques ici.</p>
+                </div>
+                <div id="chat-messages" class="chat-messages">
+                    <div class="message ai">Bonjour ! Je suis votre assistant IA. Comment puis-je vous aider dans vos études aujourd'hui ?</div>
+                </div>
+                <form id="chat-form" class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="Posez votre question ici..." required>
+                    <button type="submit">Envoyer</button>
                 </form>
             </div>
         </section>
 
-        <section id="upload">
-            <div class="container">
-                <h3>Partagez vos documents</h3>
-                <input type="file" name="image" id="tout">
+        <section id="resources" class="content-section">
+            <h2>Bibliothèque de Ressources</h2>
+            <div class="resources-grid">
+                <div class="resource-category">
+                    <h3>Mathématiques</h3>
+                    <ul>
+                        <li><a href="#">Algèbre linéaire - Cours complet</a></li>
+                        <li><a href="#">Exercices d'Analyse</a></li>
+                    </ul>
+                </div>
+                <div class="resource-category">
+                    <h3>Sciences</h3>
+                    <ul>
+                        <li><a href="#">Physique : Mécanique Newtonienne</a></li>
+                        <li><a href="#">Chimie Organique - Fiches</a></li>
+                    </ul>
+                </div>
+                <div class="resource-category">
+                    <h3>Langues</h3>
+                    <ul>
+                        <li><a href="#">Grammaire Française Avancée</a></li>
+                        <li><a href="#">Vocabulaire Anglais Technique</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="upload-box">
+                <h3>Partager un document</h3>
+                <input type="file" id="file-upload">
+            </div>
+        </section>
+
+        <section id="planner" class="content-section">
+            <h2>Planning d'Études</h2>
+            <div class="planner-container">
+                <div class="task-input">
+                    <input type="text" id="new-task" placeholder="Nouvelle tâche à accomplir...">
+                    <button id="add-task">Ajouter</button>
+                </div>
+                <ul id="task-list" class="task-list">
+                    <!-- Tasks will be added here -->
+                </ul>
             </div>
         </section>
     </main>
 
-    <footer id="contact">
-        <div class="container">
-            <h2>Contactez-nous</h2>
-            <address>
-                <p>Nom: <ins>Rehema Kasongo Mbayo</ins></p>
-                <p>Téléphone: <a href="tel:+243992623141">+243 992 623 141</a></p>
-                <p>Email: <a href="mailto:paparehemakasongo@gmail.com">paparehemakasongo@gmail.com</a></p>
-                <p>Ville: <cite>Kolwezi</cite>, Quartier: <q>Manika</q></p>
-            </address>
-            <p>&copy; 2024 Groupe d'Études Expert. Tous droits réservés.</p>
-        </div>
-    </footer>
+    <script src="./script.js"></script>
 </body>
 </html>
