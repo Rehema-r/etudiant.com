@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plateforme Étudiante - Groupe d'Études Expert</title>
+    <title>Plateforme Étudiante Expert - Version Complète</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="platform-body">
     <aside class="sidebar">
         <div class="sidebar-header">
-            <h2>Expert Study</h2>
+            <h2>Expert Study v2</h2>
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="#" class="nav-link active" data-target="dashboard">Tableau de Bord</a></li>
-                <li><a href="#" class="nav-link" data-target="ai-assistant">Assistant IA</a></li>
-                <li><a href="#" class="nav-link" data-target="resources">Ressources</a></li>
-                <li><a href="#" class="nav-link" data-target="planner">Planning</a></li>
+                <li><a href="#" class="nav-link active" data-target="dashboard"><i class="fas fa-home"></i> <span>Tableau de Bord</span></a></li>
+                <li><a href="#" class="nav-link" data-target="courses"><i class="fas fa-book"></i> <span>Mes Cours</span></a></li>
+                <li><a href="#" class="nav-link" data-target="ai-assistant"><i class="fas fa-robot"></i> <span>Assistant IA Expert</span></a></li>
+                <li><a href="#" class="nav-link" data-target="resources"><i class="fas fa-folder-open"></i> <span>Ressources</span></a></li>
+                <li><a href="#" class="nav-link" data-target="planner"><i class="fas fa-calendar-alt"></i> <span>Planning</span></a></li>
+                <li><a href="#" class="nav-link" data-target="community"><i class="fas fa-users"></i> <span>Communauté</span></a></li>
+                <li><a href="#" class="nav-link" data-target="profile"><i class="fas fa-user"></i> <span>Profil</span></a></li>
             </ul>
         </nav>
         <div class="sidebar-footer">
@@ -26,87 +30,194 @@
 
     <main class="content-area">
         <header class="top-bar">
-            <h1>Bienvenue sur votre Espace d'Études</h1>
+            <div class="header-left">
+                <h1>Espace d'Apprentissage Avancé</h1>
+            </div>
+            <div class="header-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Rechercher un cours, un sujet...">
+                </div>
+                <button id="theme-toggle" title="Changer de thème"><i class="fas fa-moon"></i></button>
+                <div class="user-info">
+                    <span id="user-name">Kasongo Mbayo Rehema</span>
+                    <img src="https://via.placeholder.com/40" alt="Avatar" class="avatar">
+                </div>
+                <button class="logout-btn" title="Déconnexion"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
         </header>
 
+        <!-- DASHBOARD -->
         <section id="dashboard" class="content-section active">
             <div class="welcome-card">
-                <h2>Bonjour, Étudiant !</h2>
-                <p>Prêt à exceller aujourd'hui ? Voici un aperçu de votre progression.</p>
+                <h2>Bonjour, Rehema !</h2>
+                <p>Continuez vos progrès. Vos cours complexes vous attendent.</p>
             </div>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3>Cours suivis</h3>
-                    <p class="stat-number">12</p>
+                    <h3>Cours en cours</h3>
+                    <p class="stat-number">4</p>
                 </div>
                 <div class="stat-card">
-                    <h3>Heures d'études</h3>
-                    <p class="stat-number">45h</p>
+                    <h3>Points d'expertise</h3>
+                    <p class="stat-number">1,250</p>
                 </div>
                 <div class="stat-card">
-                    <h3>Objectifs atteints</h3>
-                    <p class="stat-number">85%</p>
+                    <h3>Certifications</h3>
+                    <p class="stat-number">2</p>
+                </div>
+            </div>
+            <div class="recent-activity">
+                <h3>Activité Récente</h3>
+                <ul>
+                    <li>Dernière leçon : Algorithmes de tri en C++ (Complété à 80%)</li>
+                    <li>Message IA : Réponse sur la gestion de mémoire en Rust</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- COURSES -->
+        <section id="courses" class="content-section">
+            <h2>Mes Cours Académiques</h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x150" alt="Course img">
+                    <div class="course-info">
+                        <h3>Programmation C++ Avancée</h3>
+                        <p>Maîtrisez les pointeurs, les templates et la STL.</p>
+                        <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                        <span>80% Complété</span>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x150" alt="Course img">
+                    <div class="course-info">
+                        <h3>Systèmes et Langage Rust</h3>
+                        <p>Sécurité mémoire et performance sans garbage collector.</p>
+                        <div class="progress-bar"><div class="progress" style="width: 35%;"></div></div>
+                        <span>35% Complété</span>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x150" alt="Course img">
+                    <div class="course-info">
+                        <h3>Algèbre Linéaire Supérieure</h3>
+                        <p>Espaces vectoriels, matrices complexes et diagonalisation.</p>
+                        <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
+                        <span>60% Complété</span>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x150" alt="Course img">
+                    <div class="course-info">
+                        <h3>Intelligence Artificielle & Big Data</h3>
+                        <p>Réseaux de neurones, Deep Learning et analyse massive.</p>
+                        <div class="progress-bar"><div class="progress" style="width: 10%;"></div></div>
+                        <span>10% Complété</span>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- AI ASSISTANT -->
         <section id="ai-assistant" class="content-section">
             <div class="chat-container">
                 <div class="chat-header">
-                    <h2>Assistant IA Expert</h2>
-                    <p>Posez vos questions académiques ici.</p>
+                    <h2>Assistant IA Expert v2.0</h2>
+                    <p>Posez vos questions sur les langages complexes et les cours avancés.</p>
                 </div>
                 <div id="chat-messages" class="chat-messages">
-                    <div class="message ai">Bonjour ! Je suis votre assistant IA. Comment puis-je vous aider dans vos études aujourd'hui ?</div>
+                    <div class="message ai">Bonjour Rehema ! Je suis prêt à vous assister pour vos cours de C++, Rust ou Mathématiques complexes. Que souhaitez-vous savoir ?</div>
                 </div>
                 <form id="chat-form" class="chat-input-area">
-                    <input type="text" id="user-input" placeholder="Posez votre question ici..." required>
-                    <button type="submit">Envoyer</button>
+                    <input type="text" id="user-input" placeholder="Ex: Explique moi le 'Borrow Checker' en Rust..." required>
+                    <button type="submit">Interroger l'IA</button>
                 </form>
             </div>
         </section>
 
+        <!-- RESOURCES -->
         <section id="resources" class="content-section">
-            <h2>Bibliothèque de Ressources</h2>
+            <h2>Bibliothèque de Langages & Ressources</h2>
             <div class="resources-grid">
                 <div class="resource-category">
-                    <h3>Mathématiques</h3>
+                    <h3>Langages Systèmes</h3>
                     <ul>
-                        <li><a href="#">Algèbre linéaire - Cours complet</a></li>
-                        <li><a href="#">Exercices d'Analyse</a></li>
+                        <li><a href="#">C++ : Documentation ISO Standard</a></li>
+                        <li><a href="#">Rust : The Rust Programming Language Book</a></li>
+                        <li><a href="#">Go : Concurrency Patterns</a></li>
                     </ul>
                 </div>
                 <div class="resource-category">
-                    <h3>Sciences</h3>
+                    <h3>Développement Web Expert</h3>
                     <ul>
-                        <li><a href="#">Physique : Mécanique Newtonienne</a></li>
-                        <li><a href="#">Chimie Organique - Fiches</a></li>
+                        <li><a href="#">React Internals & Virtual DOM</a></li>
+                        <li><a href="#">TypeScript : Typage Avancé</a></li>
+                        <li><a href="#">Node.js : Event Loop & Performance</a></li>
                     </ul>
                 </div>
                 <div class="resource-category">
-                    <h3>Langues</h3>
+                    <h3>Mathématiques & Physique</h3>
                     <ul>
-                        <li><a href="#">Grammaire Française Avancée</a></li>
-                        <li><a href="#">Vocabulaire Anglais Technique</a></li>
+                        <li><a href="#">Physique Quantique : Introduction</a></li>
+                        <li><a href="#">Calcul Tensoriel pour Ingénieurs</a></li>
                     </ul>
                 </div>
             </div>
             <div class="upload-box">
-                <h3>Partager un document</h3>
+                <h3>Partager un cours ou un document</h3>
                 <input type="file" id="file-upload">
             </div>
         </section>
 
+        <!-- PLANNER -->
         <section id="planner" class="content-section">
-            <h2>Planning d'Études</h2>
+            <h2>Planning Stratégique</h2>
             <div class="planner-container">
                 <div class="task-input">
-                    <input type="text" id="new-task" placeholder="Nouvelle tâche à accomplir...">
-                    <button id="add-task">Ajouter</button>
+                    <input type="text" id="new-task" placeholder="Nouvelle étape de révision...">
+                    <button id="add-task">Planifier</button>
                 </div>
-                <ul id="task-list" class="task-list">
-                    <!-- Tasks will be added here -->
-                </ul>
+                <ul id="task-list" class="task-list"></ul>
+            </div>
+        </section>
+
+        <!-- COMMUNITY -->
+        <section id="community" class="content-section">
+            <h2>Forum de la Communauté Expert</h2>
+            <div class="forum-container">
+                <div class="forum-post-input">
+                    <textarea id="post-text" placeholder="Partagez une question ou un conseil avec les autres étudiants..."></textarea>
+                    <button id="submit-post"><i class="fas fa-paper-plane"></i> Publier</button>
+                </div>
+                <div id="forum-feed" class="forum-feed">
+                    <div class="post">
+                        <strong>Jean-Pierre</strong>: "Quelqu'un a compris la diagonalisation des matrices non carrées ?"
+                        <div class="post-meta">Il y a 2h</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE -->
+        <section id="profile" class="content-section">
+            <h2>Mon Profil d'Expert</h2>
+            <div class="profile-card">
+                <div class="profile-header">
+                    <img src="https://via.placeholder.com/100" alt="Rehema" class="profile-img">
+                    <div class="profile-text">
+                        <h3>Kasongo Mbayo Rehema</h3>
+                        <p>Étudiant en Ingénierie logicielle & Mathématiques</p>
+                    </div>
+                </div>
+                <div class="achievements">
+                    <h4>Badges & Succès</h4>
+                    <div class="badges">
+                        <span class="badge">Maître C++</span>
+                        <span class="badge">Apprenti Rust</span>
+                        <span class="badge">Mathématicien</span>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
