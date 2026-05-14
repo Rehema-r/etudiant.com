@@ -3,36 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>groupe d'etudes expert</title>
-<link rel="stylesheet" href="css/style.css">
+    <title>Groupe d'Études Expert</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <img src="image/fruit.jpg" alt="photo rehema" sizes="3" srcset="image/fruit.jpg">
-    <h1>RECHERCHE</h1><BR> <br>
+    <header>
+        <div class="container">
+            <h1>Groupe d'Études Expert</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#recherche">Recherche</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<label for=""></label>
+    <main>
+        <section id="hero">
+            <div class="container">
+                <img src="image/fruit.jpg" alt="photo rehema" class="hero-image">
+                <p class="slogan">Tout est possible si vous nous soutenez</p>
+                <a href="https://www.unioncompanysarl.com" class="btn">Voir plus</a>
+            </div>
+        </section>
 
+        <section id="services">
+            <div class="container">
+                <h2>Nos Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Soutien Scolaire</h3>
+                        <p>Accompagnement personnalisé pour tous les niveaux.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Préparation Examens</h3>
+                        <p>Réussissez vos examens avec nos experts.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Orientation</h3>
+                        <p>Conseils pour votre avenir académique.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section id="recherche">
+            <div class="container">
+                <h2>Recherche</h2>
+                <form action="https://www.google.com/search" method="GET" class="search-form">
+                    <label for="recherche-input">Tapez ici votre recherche :</label>
+                    <input type="search" name="q" id="recherche-input" placeholder="Ex: Mathématiques">
+                    <button type="submit">Rechercher</button>
+                </form>
+            </div>
+        </section>
 
-    <label for="recherche">tape ici </label>
-  <a href="https://google.com"><input type="button" value="recherche"> <input type="search" name="google.com" id="rechercher "> </a>
-    <br> <br> <br>
-<a href="https://www.unioncompanysarl.com"
-<button type="button">voir</button></a>
+        <section id="upload">
+            <div class="container">
+                <h3>Partagez vos documents</h3>
+                <input type="file" name="image" id="tout">
+            </div>
+        </section>
+    </main>
 
-<dir>tout et possible si vous nous soutene</dir> <br> <br>
-<div><input type="file" name="image" id="tout"></div>
-<br> <br> <br>
-<div><input type="number" name="contact" id="+243992623141"><ins>rehema</ins> CONTACT</div>
-<meta http-equiv="refresh" content="8"> 
-<Wbr><BR><CAption>@</CAption></BR></Wbr>
-<option value="list"><a href="mailto:paparehemakasongo@gmail.com"></a></option>
-<input type="text" name="yes" id="kasongo.mbayo.rehema ">
-<br><br>
-<Cite>KOLWEZI</Cite>
-<q>manika</q>
-
-
-
+    <footer id="contact">
+        <div class="container">
+            <h2>Contactez-nous</h2>
+            <address>
+                <p>Nom: <ins>Rehema Kasongo Mbayo</ins></p>
+                <p>Téléphone: <a href="tel:+243992623141">+243 992 623 141</a></p>
+                <p>Email: <a href="mailto:paparehemakasongo@gmail.com">paparehemakasongo@gmail.com</a></p>
+                <p>Ville: <cite>Kolwezi</cite>, Quartier: <q>Manika</q></p>
+            </address>
+            <p>&copy; 2024 Groupe d'Études Expert. Tous droits réservés.</p>
+        </div>
+    </footer>
 </body>
 </html>
