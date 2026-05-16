@@ -1,3 +1,6 @@
+// Make reward functions global for integration/testing
+window.updateExpertPoints = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Navigation
     const navLinks = document.querySelectorAll('.nav-link');
@@ -23,8 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const targetId = link.getAttribute('data-target');
 
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
+            // Synchronize active class across all nav link instances (Sidebar & Mobile)
+            navLinks.forEach(l => {
+                if (l.getAttribute('data-target') === targetId) {
+                    l.classList.add('active');
+                } else {
+                    l.classList.remove('active');
+                }
+            });
 
             sections.forEach(section => {
                 section.classList.remove('active');
@@ -68,7 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     thinkingDiv.remove();
                     const aiResponse = generateAdvancedAIResponse(message);
                     appendMessage('ai', aiResponse);
-                    updateExpertPoints(20); // Reward for using AI
+                    if(window.updateExpertPoints) window.updateExpertPoints(20); // Reward for using AI
+                    addActivity(`IA consultée : "${message.substring(0, 30)}..."`);
                 }, 1500);
             }
         });
@@ -244,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 forumFeed.prepend(postDiv);
                 postTextArea.value = '';
                 addLikeButton(postDiv);
-                updateExpertPoints(30); // Reward for community contribution
+                if(window.updateExpertPoints) window.updateExpertPoints(30); // Reward for community contribution
             }
         });
     }
@@ -419,9 +429,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             alert('Félicitations ! Vous avez terminé ce livre. +150 points d\'expertise.');
-            updateExpertPoints(150);
+            if(window.updateExpertPoints) window.updateExpertPoints(150);
             updateBooksReadCount();
             updateAcademicAvg(0.2); // Knowledge from books improves average
+            addActivity(`Livre terminé : ${bookName}`);
             readingView.style.display = 'none';
         });
     }
@@ -477,9 +488,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.querySelector('span').addEventListener('click', function() {
                     this.classList.toggle('completed');
                     if (this.classList.contains('completed')) {
-                        updateExpertPoints(50);
+                        if(window.updateExpertPoints) window.updateExpertPoints(50);
                     } else {
-                        updateExpertPoints(-50);
+                        if(window.updateExpertPoints) window.updateExpertPoints(-50);
                     }
                 });
                 li.querySelector('.delete-btn').addEventListener('click', () => li.remove());
@@ -489,12 +500,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function updateExpertPoints(amount) {
+    function parseXP(text) {
+        return parseInt(text.replace(/\D/g, '')) || 0;
+    }
+
+    function addActivity(text) {
+        const activityList = document.querySelector('.recent-activity ul');
+        if (activityList) {
+            const li = document.createElement('li');
+            li.textContent = text;
+            activityList.prepend(li);
+            if (activityList.children.length > 5) activityList.lastElementChild.remove();
+        }
+    }
+
+    window.updateExpertPoints = function(amount) {
         const pointsElem = document.getElementById('expert-points');
         const lbXpElem = document.getElementById('user-xp-lb');
         if (pointsElem) {
-            let currentValue = pointsElem.textContent.replace(/,/g, '');
-            let currentPoints = parseInt(currentValue);
+            let currentPoints = parseXP(pointsElem.textContent);
             currentPoints += amount;
             pointsElem.textContent = currentPoints.toLocaleString();
 
@@ -512,6 +536,15 @@ document.addEventListener('DOMContentLoaded', () => {
             welcomeCardH2.innerHTML = `Bonjour, ${name} ! <span class="level-badge">Niveau ${level}</span>`;
         }
         checkBadgeUnlocks(level, points);
+
+        // Show dynamic certificate at Level 5
+        const certContainer = document.getElementById('dynamic-cert-container');
+        if (certContainer && level >= 5 && certContainer.style.display === 'none') {
+            certContainer.style.display = 'flex';
+            document.getElementById('cert-date').textContent = new Date().toLocaleDateString('fr-FR');
+            addActivity("Diplôme d'Expert de Niveau 5 Débloqué !");
+            addNotification("Félicitations ! Votre certificat de niveau 5 est disponible.");
+        }
     }
 
     function checkBadgeUnlocks(level, points) {
@@ -586,7 +619,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         pomoInterval = null;
                         if (isWorkSession) {
                             alert("Session terminée ! Prenez une pause.");
-                            updateExpertPoints(200);
+                            if(window.updateExpertPoints) window.updateExpertPoints(200);
                             pomoTime = 5 * 60;
                             isWorkSession = false;
                             pomoStatus.textContent = "Pause bien méritée";
@@ -650,7 +683,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 terminalOutput.innerHTML = output;
-                updateExpertPoints(15);
+                if(window.updateExpertPoints) window.updateExpertPoints(15);
+                addActivity(`Code Playground : Exécution ${lang.toUpperCase()}`);
             }, 1000);
         });
     }
@@ -679,7 +713,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initial Level check
-    const initialPoints = parseInt(document.getElementById('expert-points').textContent.replace(/,/g, ''));
+    const initialPoints = parseXP(document.getElementById('expert-points').textContent);
     updateLevel(initialPoints);
 
     // Quiz Logic
@@ -689,7 +723,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = confirm("Question : Le C++ est-il un langage à typage statique ?\n\n(OK pour OUI, Annuler pour NON)");
             if (response) {
                 alert("Bravo ! +100 points d'expertise.");
-                updateExpertPoints(100);
+                if(window.updateExpertPoints) window.updateExpertPoints(100);
                 updateAcademicAvg(0.1);
             } else {
                 alert("Dommage, la réponse était OUI.");
@@ -701,9 +735,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateAcademicAvg(amount) {
         const avgElem = document.getElementById('academic-avg');
         if (avgElem) {
-            let current = parseFloat(avgElem.textContent);
+            let current = parseFloat(avgElem.textContent.replace(',', '.'));
+            if (isNaN(current)) current = 16.5;
             current = Math.min(20, Math.max(0, current + amount));
-            avgElem.textContent = current.toFixed(1);
+            avgElem.textContent = current.toFixed(1).replace('.', ',');
         }
     }
 

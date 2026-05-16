@@ -780,6 +780,8 @@ body.dark-theme .course-card,
 body.dark-theme .chat-container,
 body.dark-theme .forum-container,
 body.dark-theme .planner-container,
+body.dark-theme .playground-container,
+body.dark-theme .leaderboard-card,
 body.dark-theme .profile-card {
     background-color: var(--card-bg);
     color: var(--dark-text);
