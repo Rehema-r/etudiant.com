@@ -18,8 +18,10 @@
                 <li><a href="#" class="nav-link" data-target="courses"><i class="fas fa-book"></i> <span>Mes Cours</span></a></li>
                 <li><a href="#" class="nav-link" data-target="ai-assistant"><i class="fas fa-robot"></i> <span>Assistant IA Expert</span></a></li>
                 <li><a href="#" class="nav-link" data-target="resources"><i class="fas fa-folder-open"></i> <span>Ressources</span></a></li>
+                <li><a href="#" class="nav-link" data-target="library"><i class="fas fa-book-reader"></i> <span>Bibliothèque Mondiale</span></a></li>
                 <li><a href="#" class="nav-link" data-target="planner"><i class="fas fa-calendar-alt"></i> <span>Planning</span></a></li>
                 <li><a href="#" class="nav-link" data-target="community"><i class="fas fa-users"></i> <span>Communauté</span></a></li>
+                <li><a href="#" class="nav-link" data-target="playground"><i class="fas fa-terminal"></i> <span>Playground</span></a></li>
                 <li><a href="#" class="nav-link" data-target="profile"><i class="fas fa-user"></i> <span>Profil</span></a></li>
             </ul>
         </nav>
@@ -32,11 +34,27 @@
         <header class="top-bar">
             <div class="header-left">
                 <h1>Espace d'Apprentissage Avancé</h1>
+                <div class="header-date" id="current-date">--/--/----</div>
+                <div class="header-clock" id="current-time">00:00:00</div>
             </div>
             <div class="header-right">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Rechercher un cours, un sujet...">
+                </div>
+                <div class="notification-container">
+                    <button id="notif-btn" title="Notifications"><i class="fas fa-bell"></i><span class="notif-badge">3</span></button>
+                    <div id="notif-dropdown" class="dropdown-content">
+                        <div class="notif-header">
+                            <span>Notifications</span>
+                            <button id="mark-all-read">Tout lire</button>
+                        </div>
+                        <div id="notif-list">
+                            <p class="notif-item">Nouveau cours : <strong>Algorithmique avancée</strong> disponible !</p>
+                            <p class="notif-item">Votre réponse IA est prête.</p>
+                            <p class="notif-item">Jean-Pierre a répondu sur le Forum.</p>
+                        </div>
+                    </div>
                 </div>
                 <button id="theme-toggle" title="Changer de thème"><i class="fas fa-moon"></i></button>
                 <div class="user-info">
@@ -49,9 +67,21 @@
 
         <!-- DASHBOARD -->
         <section id="dashboard" class="content-section active">
-            <div class="welcome-card">
-                <h2>Bonjour, Rehema !</h2>
-                <p>Continuez vos progrès. Vos cours complexes vous attendent.</p>
+            <div class="dashboard-top-flex">
+                <div class="welcome-card">
+                    <h2>Bonjour, Rehema !</h2>
+                    <p>Continuez vos progrès. Vos cours complexes vous attendent.</p>
+                </div>
+                <div class="pomodoro-card">
+                    <h3>Focus Pomodoro</h3>
+                    <div class="timer-display" id="pomodoro-timer">25:00</div>
+                    <div class="timer-controls">
+                        <button id="start-pomo" title="Démarrer"><i class="fas fa-play"></i></button>
+                        <button id="pause-pomo" title="Pause"><i class="fas fa-pause"></i></button>
+                        <button id="reset-pomo" title="Réinitialiser"><i class="fas fa-redo"></i></button>
+                    </div>
+                    <p id="pomo-status">Session d'étude</p>
+                </div>
             </div>
             <div class="stats-grid">
                 <div class="stat-card">
@@ -60,27 +90,78 @@
                 </div>
                 <div class="stat-card">
                     <h3>Points d'expertise</h3>
-                    <p class="stat-number">1,250</p>
+                    <p class="stat-number" id="expert-points">1,250</p>
                 </div>
                 <div class="stat-card">
                     <h3>Certifications</h3>
                     <p class="stat-number">2</p>
                 </div>
+                <div class="stat-card">
+                    <h3>Livres terminés</h3>
+                    <p class="stat-number" id="books-read-count">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Moyenne Académique</h3>
+                    <p class="stat-number" id="academic-avg">16.5</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Heures d'étude</h3>
+                    <p class="stat-number" id="study-hours">124</p>
+                </div>
+                <div class="stat-card streak-card">
+                    <h3>Série d'étude</h3>
+                    <p class="stat-number" id="study-streak">7</p>
+                    <span>jours consécutifs</span>
+                </div>
             </div>
-            <div class="recent-activity">
-                <h3>Activité Récente</h3>
-                <ul>
-                    <li>Dernière leçon : Algorithmes de tri en C++ (Complété à 80%)</li>
-                    <li>Message IA : Réponse sur la gestion de mémoire en Rust</li>
-                </ul>
+            <div class="dashboard-bottom-grid">
+                <div class="recent-activity">
+                    <h3>Activité Récente</h3>
+                    <ul>
+                        <li>Dernière leçon : Algorithmes de tri en C++ (Complété à 80%)</li>
+                        <li>Message IA : Réponse sur la gestion de mémoire en Rust</li>
+                    </ul>
+                </div>
+                <div class="skills-card">
+                    <h3>Progression des Compétences</h3>
+                    <div class="skill-item">
+                        <span>C++ / Systèmes</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Mathématiques</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 70%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Rust / Sécurité</span>
+                        <div class="skill-bar" style="background: #e9ecef;"><div class="skill-fill" style="width: 40%; background: #e67e22;"></div></div>
+                    </div>
+                </div>
+                <div class="leaderboard-card">
+                    <h3>Top Étudiants (Expert)</h3>
+                    <ul class="leaderboard-list">
+                        <li><span>1. Jean-Pierre</span> <span>2,450 XP</span></li>
+                        <li class="current-user"><span>2. Vous (Rehema)</span> <span id="user-xp-lb">1,250 XP</span></li>
+                        <li><span>3. Marc-André</span> <span>1,100 XP</span></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
         <!-- COURSES -->
         <section id="courses" class="content-section">
-            <h2>Mes Cours Académiques</h2>
-            <div class="courses-grid">
-                <div class="course-card">
+            <div id="course-list-view">
+                <div class="courses-header">
+                    <h2>Mes Cours Académiques</h2>
+                    <div class="course-filters">
+                        <button class="filter-btn active" data-category="all">Tous</button>
+                        <button class="filter-btn" data-category="code">Code</button>
+                        <button class="filter-btn" data-category="math">Math</button>
+                        <button class="filter-btn" data-category="systems">Systèmes</button>
+                    </div>
+                </div>
+                <div class="courses-grid">
+                <div class="course-card" data-category="code">
                     <img src="https://via.placeholder.com/300x150" alt="Course img">
                     <div class="course-info">
                         <h3>Programmation C++ Avancée</h3>
@@ -89,7 +170,7 @@
                         <span>80% Complété</span>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-category="systems">
                     <img src="https://via.placeholder.com/300x150" alt="Course img">
                     <div class="course-info">
                         <h3>Systèmes et Langage Rust</h3>
@@ -98,7 +179,7 @@
                         <span>35% Complété</span>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-category="math">
                     <img src="https://via.placeholder.com/300x150" alt="Course img">
                     <div class="course-info">
                         <h3>Algèbre Linéaire Supérieure</h3>
@@ -107,13 +188,55 @@
                         <span>60% Complété</span>
                     </div>
                 </div>
-                <div class="course-card">
+                <div class="course-card" data-category="code">
                     <img src="https://via.placeholder.com/300x150" alt="Course img">
                     <div class="course-info">
                         <h3>Intelligence Artificielle & Big Data</h3>
                         <p>Réseaux de neurones, Deep Learning et analyse massive.</p>
                         <div class="progress-bar"><div class="progress" style="width: 10%;"></div></div>
                         <span>10% Complété</span>
+                    </div>
+                </div>
+                <div class="course-card" data-category="systems">
+                    <img src="https://via.placeholder.com/300x150" alt="Course img">
+                    <div class="course-info">
+                        <h3>Sécurité des Réseaux & Cryptographie</h3>
+                        <p>Protection des infrastructures et protocoles de chiffrement.</p>
+                        <div class="progress-bar"><div class="progress" style="width: 0%;"></div></div>
+                        <span>0% Complété</span>
+                    </div>
+                </div>
+                <div class="course-card" data-category="code">
+                    <img src="https://via.placeholder.com/300x150" alt="Course img">
+                    <div class="course-info">
+                        <h3>Développement Mobile Multiplateforme</h3>
+                        <p>Créez des apps natives avec Flutter et React Native.</p>
+                        <div class="progress-bar"><div class="progress" style="width: 0%;"></div></div>
+                        <span>0% Complété</span>
+                    </div>
+                </div>
+            </div> <!-- End courses-grid -->
+            </div> <!-- End course-list-view -->
+
+            <div id="course-detail-view" style="display: none;">
+                <button id="back-to-courses" class="btn-secondary"><i class="fas fa-arrow-left"></i> Retour aux cours</button>
+                <div class="detail-header">
+                    <h2 id="detail-title">Titre du Cours</h2>
+                    <p id="detail-desc">Description détaillée...</p>
+                </div>
+
+                <div class="course-content-layout">
+                    <div class="modules-list">
+                        <h3>Modules de formation</h3>
+                        <div class="module-item"><span>Module 1 : Introduction et Fondamentaux</span> <i class="fas fa-check-circle" style="color: var(--success-color);"></i></div>
+                        <div class="module-item"><span>Module 2 : Architecture et Structures</span> <i class="fas fa-play-circle" style="color: var(--accent-color);"></i></div>
+                        <div class="module-item"><span>Module 3 : Optimisation Avancée</span> <i class="fas fa-lock"></i></div>
+                    </div>
+
+                    <div class="quiz-preview">
+                        <h3>Évaluation Rapide</h3>
+                        <p>Testez vos connaissances sur ce chapitre.</p>
+                        <button id="start-quiz" class="btn-primary">Démarrer le Quiz</button>
                     </div>
                 </div>
             </div>
@@ -138,7 +261,13 @@
 
         <!-- RESOURCES -->
         <section id="resources" class="content-section">
-            <h2>Bibliothèque de Langages & Ressources</h2>
+            <div class="resources-header">
+                <h2>Ressources Techniques & Docs</h2>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="resource-search" placeholder="Filtrer les ressources...">
+                </div>
+            </div>
             <div class="resources-grid">
                 <div class="resource-category">
                     <h3>Langages Systèmes</h3>
@@ -170,6 +299,100 @@
             </div>
         </section>
 
+        <!-- LIBRARY -->
+        <section id="library" class="content-section">
+            <div class="library-header">
+                <h2>Bibliothèque Mondiale Gratuite</h2>
+                <div class="search-box library-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="library-search-input" placeholder="Chercher un livre, un auteur...">
+                </div>
+            </div>
+            <div class="library-grid" id="library-grid">
+                <!-- Book Card 1 -->
+                <div class="book-card" data-title="Algorithms" data-author="Jeff Erickson">
+                    <div class="book-cover">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="book-info">
+                        <h3>Algorithms</h3>
+                        <p>Jeff Erickson</p>
+                        <div class="book-actions">
+                            <button class="btn-read" data-book="Algorithms" data-url="https://jeffe.cs.illinois.edu/teaching/algorithms/">Lire <i class="fas fa-external-link-alt"></i></button>
+                            <button class="btn-ai-summary" data-book="Algorithms">Résumé IA</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Book Card 2 -->
+                <div class="book-card" data-title="The Great Gatsby" data-author="F. Scott Fitzgerald">
+                    <div class="book-cover">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="book-info">
+                        <h3>The Great Gatsby</h3>
+                        <p>F. Scott Fitzgerald</p>
+                        <div class="book-actions">
+                            <button class="btn-read" data-book="The Great Gatsby" data-url="https://www.gutenberg.org/ebooks/64317">Lire <i class="fas fa-external-link-alt"></i></button>
+                            <button class="btn-ai-summary" data-book="The Great Gatsby">Résumé IA</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Book Card 3 -->
+                <div class="book-card" data-title="Clean Code" data-author="Robert C. Martin">
+                    <div class="book-cover">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="book-info">
+                        <h3>Clean Code</h3>
+                        <p>Robert C. Martin</p>
+                        <div class="book-actions">
+                            <button class="btn-read" data-book="Clean Code" data-url="https://archive.org/details/cleancodehandboo0000mart">Lire <i class="fas fa-external-link-alt"></i></button>
+                            <button class="btn-ai-summary" data-book="Clean Code">Résumé IA</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Book Card 4 -->
+                <div class="book-card" data-title="Calculus Made Easy" data-author="Silvanus P. Thompson">
+                    <div class="book-cover">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="book-info">
+                        <h3>Calculus Made Easy</h3>
+                        <p>Silvanus P. Thompson</p>
+                        <div class="book-actions">
+                            <button class="btn-read" data-book="Calculus Made Easy" data-url="https://www.gutenberg.org/ebooks/33283">Lire <i class="fas fa-external-link-alt"></i></button>
+                            <button class="btn-ai-summary" data-book="Calculus Made Easy">Résumé IA</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reading View Overlay -->
+            <div id="reading-view" class="reading-overlay" style="display: none;">
+                <div class="reading-container">
+                    <div class="reading-header">
+                        <h3 id="reading-book-title">Lecture en cours...</h3>
+                        <button id="close-reader">&times;</button>
+                    </div>
+                    <div class="reading-content">
+                        <p>Simulation du contenu du livre... (Ici s'afficherait le PDF ou le texte du livre gratuit)</p>
+                        <div class="progress-container">
+                            <label>Progression de lecture</label>
+                            <input type="range" id="reading-progress-slider" min="0" max="100" value="0">
+                            <span id="progress-percentage">0%</span>
+                        </div>
+                        <div class="notes-container">
+                            <label><i class="fas fa-sticky-note"></i> Mes Notes de Lecture</label>
+                            <textarea id="reading-notes" placeholder="Prenez des notes ici pendant votre lecture..."></textarea>
+                        </div>
+                    </div>
+                    <div class="reading-footer">
+                        <button id="mark-finished" class="btn-success">Marquer comme terminé</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- PLANNER -->
         <section id="planner" class="content-section">
             <h2>Planning Stratégique</h2>
@@ -190,10 +413,39 @@
                     <textarea id="post-text" placeholder="Partagez une question ou un conseil avec les autres étudiants..."></textarea>
                     <button id="submit-post"><i class="fas fa-paper-plane"></i> Publier</button>
                 </div>
+                <div class="community-status">
+                    <span class="status-indicator online"></span> <strong>12 Étudiants en ligne</strong> | <i class="fas fa-headset"></i> Salon d'étude vocal actif
+                    <button id="join-voice" class="btn-voice"><i class="fas fa-sign-in-alt"></i> Rejoindre</button>
+                </div>
                 <div id="forum-feed" class="forum-feed">
                     <div class="post">
                         <strong>Jean-Pierre</strong>: "Quelqu'un a compris la diagonalisation des matrices non carrées ?"
                         <div class="post-meta">Il y a 2h</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CODE PLAYGROUND (New Pro Feature) -->
+        <section id="playground" class="content-section">
+            <h2>Expert Code Playground (Beta)</h2>
+            <p>Testez vos extraits de code C++, Rust ou Python directement ici.</p>
+            <div class="playground-container">
+                <div class="editor-side">
+                    <div class="editor-header">
+                        <select id="playground-lang">
+                            <option value="cpp">C++</option>
+                            <option value="rust">Rust</option>
+                            <option value="python">Python</option>
+                        </select>
+                        <button id="run-code" class="btn-primary"><i class="fas fa-play"></i> Exécuter</button>
+                    </div>
+                    <textarea id="code-editor" placeholder="// Tapez votre code ici..."></textarea>
+                </div>
+                <div class="terminal-side">
+                    <div class="terminal-header">Sortie Console</div>
+                    <div id="terminal-output" class="terminal-content">
+                        > Prêt pour l'exécution...
                     </div>
                 </div>
             </div>
@@ -212,15 +464,61 @@
                 </div>
                 <div class="achievements">
                     <h4>Badges & Succès</h4>
-                    <div class="badges">
-                        <span class="badge">Maître C++</span>
-                        <span class="badge">Apprenti Rust</span>
-                        <span class="badge">Mathématicien</span>
+                    <div class="badges" id="badge-container">
+                        <span class="badge unlocked" title="Maître C++"><i class="fas fa-medal"></i> Maître C++</span>
+                        <span class="badge unlocked" title="Mathématicien"><i class="fas fa-square-root-alt"></i> Mathématicien</span>
+                        <span class="badge locked" id="badge-rust" title="Apprenti Rust (Niveau 4 requis)"><i class="fas fa-lock"></i> Apprenti Rust</span>
+                        <span class="badge locked" id="badge-library" title="Lecteur Assidu (5 livres requis)"><i class="fas fa-lock"></i> Lecteur Assidu</span>
                     </div>
+                </div>
+                <div class="certificates-section">
+                    <h4>Certifications Académiques</h4>
+                    <div class="cert-grid">
+                        <div class="cert-card">
+                            <i class="fas fa-certificate"></i>
+                            <div class="cert-info">
+                                <h5>Algorithmique Avancée</h5>
+                                <p>Délivré le 12/10/2023</p>
+                            </div>
+                        </div>
+                        <div class="cert-card">
+                            <i class="fas fa-certificate"></i>
+                            <div class="cert-info">
+                                <h5>Systèmes Embarqués</h5>
+                                <p>Délivré le 05/01/2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-settings">
+                    <h4>Paramètres du Profil</h4>
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label>Nom d'affichage</label>
+                            <input type="text" id="edit-name" value="Kasongo Mbayo Rehema">
+                        </div>
+                        <div class="form-group">
+                            <label>Bio</label>
+                            <textarea id="edit-bio">Étudiant en Ingénierie logicielle & Mathématiques</textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Enregistrer les modifications</button>
+                    </form>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="#" class="nav-link active" data-target="dashboard"><i class="fas fa-home"></i><span>Home</span></a></li>
+            <li><a href="#" class="nav-link" data-target="courses"><i class="fas fa-book"></i><span>Cours</span></a></li>
+            <li><a href="#" class="nav-link" data-target="ai-assistant"><i class="fas fa-robot"></i><span>IA</span></a></li>
+            <li><a href="#" class="nav-link" data-target="community"><i class="fas fa-users"></i><span>Forum</span></a></li>
+                <li><a href="#" class="nav-link" data-target="playground"><i class="fas fa-terminal"></i> <span>Playground</span></a></li>
+            <li><a href="#" class="nav-link" data-target="profile"><i class="fas fa-user"></i><span>Profil</span></a></li>
+        </ul>
+    </nav>
 
     <script src="./script.js"></script>
 </body>
